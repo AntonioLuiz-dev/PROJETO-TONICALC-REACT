@@ -63,4 +63,4 @@ Em transição de carreira para a área de Desenvolvimento Front-end / Full Stac
 
 🖼️ Preview do Projeto
 
-<img src="https://github.com/AntonioLuiz-dev/PROJETO-CONVERSOR-DE-MOEDA/blob/main/assets/mockup.jpg?raw=true" width="500px"/>
+<img src="https://github.com/AntonioLuiz-dev/tonicalc-react/blob/main/public/assets/mockup.png?raw=true" width="500px"/>
