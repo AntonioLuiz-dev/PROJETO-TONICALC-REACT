@@ -7,7 +7,7 @@ O projeto nasceu como uma calculadora em **JavaScript puro** e foi posteriorment
 ---
 
 ## 🚀 Demonstração
-🔗 **Aplicação online:** *(adicione aqui o link do Vercel)*
+🔗 **Aplicação online:** projeto-tonicalc-react.vercel.app
 
 ---
 
