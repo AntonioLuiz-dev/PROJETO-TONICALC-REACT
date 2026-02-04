@@ -1,0 +1,452 @@
+/* =========================
+   VARIÁVEIS (NEON + GLASS)
+========================= */
+:root {
+  --bg: #05080f;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+
+  --text: #e5e7eb;
+  --muted: rgba(255, 255, 255, 0.6);
+
+  --neon-blue: #38bdf8;
+  --neon-purple: #a855f7;
+  --neon-red: #ef4444;
+
+  --btn-bg: rgba(255, 255, 255, 0.12);
+  --btn-hover: rgba(255, 255, 255, 0.22);
+
+  --shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* LIGHT MODE */
+body.light {
+  --bg: #e5e7eb;
+  --glass: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(0, 0, 0, 0.1);
+
+  --text: #020617;
+  --muted: #475569;
+
+  --btn-bg: rgba(255, 255, 255, 0.9);
+  --btn-hover: rgba(226, 232, 240, 1);
+
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    radial-gradient(circle at top, #1e293b, var(--bg)),
+    linear-gradient(120deg, #0f172a, #020617);
+
+  color: var(--text);
+  transition: background 0.4s ease;
+}
+
+/* =========================
+   CALCULADORA (GLASS)
+========================= */
+.calculator {
+  width: 360px;
+  padding: 22px;
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+
+  animation: fadeIn 0.6s ease;
+}
+
+/* =========================
+   HEADER
+========================= */
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px;
+  transition: transform 0.2s ease;
+}
+
+.actions button:hover {
+  transform: scale(1.2);
+}
+
+/* =========================
+   DISPLAY
+========================= */
+.display {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.previous {
+  font-size: 14px;
+  opacity: 0.6;
+  text-align: right;
+}
+
+.current {
+  font-size: 34px;
+  text-align: right;
+  margin-top: 6px;
+  color: var(--neon-blue);
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+}
+
+/* =========================
+   BOTÕES
+========================= */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 18px;
+
+  font-size: 18px;
+  color: var(--text);
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+
+  box-shadow:
+    inset 0 0 0 rgba(255,255,255,0),
+    0 8px 20px rgba(0,0,0,0.4);
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* OPERADORES */
+.operator {
+  color: var(--neon-purple);
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.7);
+}
+
+/* IGUAL */
+.equal {
+  grid-column: span 2;
+  background: linear-gradient(
+    135deg,
+    var(--neon-blue),
+    var(--neon-purple)
+  );
+  color: white;
+  font-weight: bold;
+  box-shadow:
+    0 0 20px rgba(56, 189, 248, 0.6),
+    0 0 40px rgba(168, 85, 247, 0.4);
+}
+
+.equal:hover {
+  filter: brightness(1.1);
+}
+
+/* LIMPAR */
+.danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.6);
+}
+
+/* ZERO */
+.zero {
+  grid-column: span 2;
+}
+
+/* =========================
+   CIENTÍFICA
+========================= */
+.scientific-panel {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.scientific-panel.active {
+  display: grid;
+}
+
+.scientific-panel .btn {
+  font-size: 15px;
+  color: var(--neon-blue);
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+/* =========================
+   HISTÓRICO
+========================= */
+.history {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 14px;
+
+  border: 1px solid var(--glass-border);
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.history-header button {
+  background: none;
+  border: none;
+  color: var(--neon-blue);
+  cursor: pointer;
+}
+
+#historyList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#historyList li {
+  background: var(--btn-bg);
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+
+  animation: slideUp 0.3s ease forwards;
+}
+
+#historyList li:hover {
+  background: var(--btn-hover);
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.calculator {
+  animation: appEnter 0.6s cubic-bezier(.25,.8,.25,1);
+}
+
+/* =========================
+   SPLASH SCREEN
+========================= */
+#app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  background:
+    radial-gradient(circle at top, #1e293b, #05080f);
+
+  animation: splashOut 0.6s ease forwards;
+  animation-delay: 1.6s;
+}
+
+#app-splash img {
+  width: 90px;
+  height: 90px;
+  animation: logoPulse 1.2s ease infinite;
+}
+
+#app-splash span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+/* LOGO */
+@keyframes logoPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* SAÍDA */
+@keyframes splashOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* =========================
+   SPLASH SCREEN PREMIUM
+========================= */
+#app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+
+  background: radial-gradient(circle at top, #1e293b, #05080f);
+}
+
+#app-splash img {
+  width: 90px;
+  height: 90px;
+  animation: logoPulse 1.2s ease infinite;
+}
+
+#app-splash span {
+  font-size: 22px;
+  font-weight: 600;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+/* Progress bar */
+.progress-container {
+  width: 180px;
+  height: 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #38bdf8,
+    #22d3ee,
+    #38bdf8
+  );
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+  animation: loadingBar 1.8s ease forwards;
+}
+
+/* Animations */
+@keyframes loadingBar {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes logoPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Splash exit */
+.hide-splash {
+  animation: splashOut 0.6s ease forwards;
+}
+
+@keyframes splashOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
